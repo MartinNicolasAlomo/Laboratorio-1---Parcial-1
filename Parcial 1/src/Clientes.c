@@ -36,7 +36,7 @@ int ImprimirListaClientes(Clientes vector[], int limite) {
 		printf("Nombre\tApellido\tLegajo\n");
 		for (i = 0; i < limite; i++) {
 			if (vector[i].idCliente != -1) {
-				printf("%8s %8s %4d\n",vector[i].nombreEmpresa, vector[i].cuit, vector[i].idCliente);
+				printf("%4d %8s %8s %12s %12s \n",vector[i].idCliente,vector[i].nombreEmpresa, vector[i].cuit,vector[i].direccion,vector[i].localidad);
 			}
 		}
 	}

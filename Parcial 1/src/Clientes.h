@@ -12,4 +12,9 @@ typedef struct{
 }Clientes;
 
 
+void InicializarVectorIDClientes(Clientes vectorPersonas[], int cantidadElementos, int valorInicial);
+int BuscarPrimerOcurrenciaClientes(Clientes vectorPersonas[], int cantidadElementos, int valorInicial);
+int ImprimirListaClientes(Clientes vector[], int limite);
+
+
 #endif /* CLIENTES_H_ */

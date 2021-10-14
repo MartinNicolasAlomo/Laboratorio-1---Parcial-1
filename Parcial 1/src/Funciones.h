@@ -57,9 +57,5 @@ int ListarVectoresPares(int vector[], int limite);
 int ContarPalabras(char vector[], int limite, int* pPalabras);
 
 
-void InicializarVectorIDClientes(Clientes vectorPersonas[], int cantidadElementos, int valorInicial);
-int BuscarPrimerOcurrenciaClientes(Clientes vectorPersonas[], int cantidadElementos, int valorInicial);
-int ImprimirListaClientes(Clientes vector[], int limite);
-
 
 #endif /* FUNCIONES_H_ */

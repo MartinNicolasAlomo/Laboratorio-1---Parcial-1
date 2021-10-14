@@ -40,6 +40,7 @@ int esTelefono(char *cadena);
 
 
 int MenuOpciones(int vector[], int limite, int estadoInicial, int minimo, int maximo);
-
+int IngresarAlfanumerico(char* pAlfanumerica, int limite, char *mensaje, char *mensajeError, int reintentos);
+int esAlfaNumerico(char *cadena,int limite);
 
 #endif /* INGRESOS_H_ */

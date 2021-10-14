@@ -4,7 +4,12 @@
 #include <ctype.h>
 #include "Funciones.h"
 #include "Ingresos.h"
+#include "Clientes.h"
 
+int MenuOpciones(int vector[], int limite, int estadoInicial, int minimo, int maximo){
+
+return 0;
+}
 
 int IngresarEntero(int *pEntero, char *mensaje, char *mensajeError, int minimo, int maximo, int reintentos) {
 	int retorno = -1;
@@ -229,6 +234,42 @@ int IngresarTexto(char* pNombre, int limite, char *mensaje, char *mensajeError, 
 	return retorno;
 }
 
+
+int IngresarAlfanumerico(char* pAlfanumerica, int limite, char *mensaje, char *mensajeError, int reintentos) {
+	int retorno = 0;
+	float bufferString;
+
+	if (pAlfanumerica != NULL && mensaje != NULL && mensajeError != NULL && reintentos >= 0) {
+		do {
+			printf("%s\n", mensaje);
+			if (PedirDatos(bufferString,sizeof(bufferString)) == 1 && esAlfaNumerico(bufferString,sizeof(bufferString)) == 1 && strnlen(bufferString,sizeof(bufferString)) < limite) {
+				*pAlfanumerica = bufferString;
+				retorno = 1;
+				break;
+			}
+			else {
+				printf("%s\n", mensajeError);
+				reintentos--;
+			}
+		} while (reintentos >= 0);
+	}
+	return retorno;
+}
+
+
+int esAlfaNumerico(char *cadena,int limite) {
+	int retorno = 1;
+	int i = 0;
+
+	for (i=0; i<limite && cadena[i] != '\0'; i++) {
+		if( (cadena[i] != ' ') && (cadena[i] < 'a' || cadena[i] > 'z') && (cadena[i] < 'A' || cadena[i] > 'Z') && (cadena[i] < '0' || cadena[i] > '9')) {
+			retorno = 0;
+			break;
+		}
+	}
+	return retorno;
+}
+
 int PedirDatos(char *cadena, int longitud){
 	int retorno = 0;
 	char bufferString[4096];  // <<<*******
@@ -300,18 +341,7 @@ int CargarAlumnosSecuencial(int legajo[], char nombre[][50], float nota[],int ed
 }
 
 
-int esAlfaNumerico(char *cadena) {
-	int retorno = 1;
-	int i = 0;
 
-	for (i = 0 ; cadena[i] != '\0'; i++) {
-		if( (cadena[i] != ' ') && (cadena[i] < 'a' || cadena[i] > 'z') && (cadena[i] < 'A' || cadena[i] > 'Z') && (cadena[i] < '0' || cadena[i] > '9')) {
-			retorno = 0;
-			break;
-		}
-	}
-	return retorno;
-}
 
 
 int esTelefono(char *cadena) {
@@ -336,75 +366,5 @@ int esTelefono(char *cadena) {
 	return retorno;
 }
 
-int MenuOpciones(int vector[], int limite, int estadoInicial, int minimo, int maximo){
-	int opcion;
-	float promedio;
-	int flagInicial = 0;
-	int flagCarga = 0;
 
-	do {
-		if (IngresarEntero(&opcion,
-				"Seleccione una opcion: \n\n1-Inicializar\n2-Cargar\n3-Mostrar\n4-Calcular Promedio\n5-Ordenar\n6-Salir",
-				"No es una opcion valida, reintentelo de nuevo\n", 1, 6, 3)
-				== 1) {
-
-			switch (opcion) {
-			case 1:
-				puts("Usted a seleccionado la opción 1-Inicializar\n");
-				InicializarVector(vector,limite,estadoInicial);
-				puts("Se ha inicializado el vector\n");
-				flagInicial = 1;
-				break;
-
-			case 2:
-				if(flagInicial == 1){
-					puts("Usted a seleccionado la opción 2-Cargar\n");
-					CargarVectorSecuencial(vector,limite,minimo,maximo);
-					puts("Se ha cargado el vector\n");
-					flagCarga = 1;
-				}
-				else{
-					puts("Aun no se inicializo el vector\n");
-				}
-				break;
-			case 3:
-				if(flagCarga == 1){
-					puts("Usted a seleccionado la opción 3-Mostrar\n");
-					ListarVectoresEnteros(vector,limite);
-				}
-				else{
-					puts("No se cargo el vector");
-				}
-				break;
-			case 4:
-				if(flagCarga == 1){
-					puts("Usted a seleccionado la opción 4-Calcular\n");
-					if(PromediarVector(vector,limite,&promedio)==1){
-						printf("El promedio es: %.2f\n",promedio);
-					}
-					else{
-						puts("No se pudo sacar el promedio\n");
-					}
-				}
-				else{
-					puts("No se cargo el vector\n");
-				}
-				break;
-			case 5:
-				if(flagCarga == 1){
-				puts("Usted a seleccionado la opción 5-Ordenar\n");
-
-				}
-				else{
-					puts("No se cargo el vector\n");
-				}
-				break;
-			case 6:
-				puts("Usted salió de la calculadora\n");
-				break;
-			}
-		}
-	} while (opcion != 6);
-return 0;
-}
 

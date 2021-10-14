@@ -63,7 +63,6 @@ las reglas de estilo de la cátedra.
 int main(void) {
 	setbuf(stdout, NULL);
 	Clientes arrayClientes[CANTPERSONAS];
-
 	char auxiliarEmpresa[50];
 	char auxiliarDireccion[50];
 	char auxiliarLocalidad[50];
@@ -109,7 +108,7 @@ int main(void) {
 					puts("El cuit debe tener numeros y dos guiones como maximo\n");
 					break;
 				}
-				if(IngresarAlfaNumerico(auxiliarDireccion,50,"Ingrese la direccion: \n","Error\n",2) == 1){
+				if(IngresarAlfanumerico(auxiliarDireccion,50,"Ingrese la direccion: \n","Error\n",2) == 1){
 					printf("%s\n",auxiliarDireccion);
 				}
 				else{
@@ -175,23 +174,24 @@ int main(void) {
 
 			case 3:
 				if(flagInicial == 1){
-					if(IngresarEntero(&auxiliarIDCLiente, "ID a dar de baja: \n", "Error\n", 1, 10, 2) == 1){
-						printf("%d\n",auxiliarIDCLiente);
-					}
-					else{
-						puts("El ID debe tener numeros\n");
-					}
-					indiceResultadoBusqueda = BuscarPrimerOcurrenciaClientes(arrayClientes, CANTPERSONAS, auxiliarIDCLiente);
+					while(confirmacionBaja != 's'){
+						if(IngresarEntero(&auxiliarIDCLiente, "ID a dar de baja: \n", "Error\n", 1, 10, 2) == 1){
+							printf("%d\n",auxiliarIDCLiente);
+						}
+						else{
+							puts("El ID debe tener numeros\n");
+						}
+						indiceResultadoBusqueda = BuscarPrimerOcurrenciaClientes(arrayClientes, CANTPERSONAS, auxiliarIDCLiente);
 
-					if(indiceResultadoBusqueda == -1){
-						puts("No se encuentra el ID del cliente\n");
-						break;
+						if(indiceResultadoBusqueda == -1){
+							puts("No se encuentra el ID del cliente\n");
+							break;
+						}
+						arrayClientes[indiceResultadoBusqueda].idCliente = -1;
+						puts("Esta seguro/a que desea dar de baja este cliente");
+						scanf("%c",confirmacionBaja);
 					}
-					arrayClientes[indiceResultadoBusqueda].idCliente = -1;
 				}
-				puts("Esta seguro/a que desea dar de baja este cliente");
-				scanf("%c",confirmacionBaja);
-
 				break;
 
 			case 5:
@@ -216,10 +216,10 @@ int main(void) {
 			case 11:
 				puts("Listado de clientes\n");
 				break;
-
 			}
 		}
 	} while (opcion != 11);
+
 
 	return EXIT_SUCCESS;
 }

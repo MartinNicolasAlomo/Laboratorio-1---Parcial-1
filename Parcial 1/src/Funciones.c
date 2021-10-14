@@ -83,8 +83,8 @@ int CargarVectorEnterosAleatorioPorNumero(int vector[], int limite){
 	char seguir;
 
 	do {
-		IngresarEntero(&auxiliar, "Ingrese un numero: \n", "Error, reingrese un numero: \n", 0, limite);
-		IngresarEntero(&index, "Ingrese la posiicion: \n", "Error, reingrese un numero: \n", 0, limite);
+		IngresarEntero(&auxiliar, "Ingrese un numero: \n", "Error, reingrese un numero: \n", 0, limite,2);
+		IngresarEntero(&index, "Ingrese la posiicion: \n", "Error, reingrese un numero: \n", 0, limite,2);
 		vector[index] = auxiliar;
 		printf("Desea ingresar otro numero: \n");
 		fflush(stdin);
@@ -385,7 +385,6 @@ int ListarVectoresPares(int vector[], int limite){
 int BorrarVectorImpares(int vector[], int limite){
 	int retorno = 0;
 	int i;
-	int suma = 0;
 
 	if (vector != NULL && limite > 0) {
 		for (i = 0; i < limite; i++) {
